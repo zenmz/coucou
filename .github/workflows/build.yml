@@ -5,6 +5,7 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -150,6 +151,7 @@ jobs:
             -project NotchBuddy/NotchBuddy.xcodeproj \
             -scheme NotchBuddy \
             -configuration Release \
+            -derivedDataPath build/DerivedData \
             build \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO 2>&1 | tee build.log || {
@@ -157,6 +159,16 @@ jobs:
               grep -E "error:" build.log | sort -u | head -30 | sed 's/^/::error::/'
               exit 1
             }
+
+      - name: Archive build artifact
+        run: |
+          ditto -c -k --keepParent build/DerivedData/Build/Products/Release/Coucou.app Coucou-macOS.zip
+
+      - name: Upload Coucou app artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Coucou-macOS
+          path: Coucou-macOS.zip
 
       - name: Build App Store target (unsigned)
         run: |
