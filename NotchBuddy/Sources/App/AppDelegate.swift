@@ -314,6 +314,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         #endif
         CryptoController.shared.start()
         PortfolioController.shared.start()
+        ClipboardMonitor.shared.start()
     }
 }
 

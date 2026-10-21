@@ -132,6 +132,8 @@ enum PillCatalog {
               category: .service,   subtitle: String(localized: "Integration"),  source: .n8n),
         .init(id: "integration_portfolio", name: "Portfolio",   color: "#FFD700",
               category: .service,   subtitle: String(localized: "Integration"),  source: .n8n),
+        .init(id: "integration_clipboard", name: "Clipboard", color: "#38BDF8",
+              category: .service,   subtitle: String(localized: "Utility"),      source: .n8n),
     ]
 
     /// Pills available in the current build target.

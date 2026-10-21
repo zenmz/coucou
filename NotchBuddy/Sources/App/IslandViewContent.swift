@@ -1970,8 +1970,8 @@ struct IntegrationCardView: View {
             #else
             return false
             #endif
-        case "integration_crypto":
-            return true  // public market data: no key, nothing to set up
+        case "integration_crypto", "integration_clipboard":
+            return true  // public market data / local clipboard: no key, nothing to set up
         case "integration_portfolio":
             return PortfolioSettings.hasAnyAccount
         case "ai_anthropic":  return KeychainStore.shared.get("anthropic-api-key") != nil
@@ -2125,6 +2125,9 @@ struct IntegrationCardView: View {
                    : task.id == "integration_calcom"  ? appState.calcomError
                    : nil
         if let err = svcErr { return err }
+        if task.id == "integration_clipboard" {
+            return "\(ClipboardStore.shared.items.count) clips"
+        }
         // Pills driven by hooks, never by a key: the idle card reports whether the
         // hooks are in place. integration_claude read "Connected · loading…" with
         // nothing left to load — a session replaces this card, it never resolves here.
@@ -2228,6 +2231,9 @@ struct IntegrationCardView: View {
                 .transition(.opacity)
         } else if task.id == "integration_portfolio" {
             PortfolioCardView()
+                .transition(.opacity)
+        } else if task.id == "integration_clipboard" {
+            ClipboardCardView()
                 .transition(.opacity)
         } else if task.id == "integration_whatsapp" {
             // Its own card in every state (not linked, no message, conversations).

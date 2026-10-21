@@ -667,6 +667,12 @@ final class IslandWindowController: NSWindowController {
             islandPanel.makeKey()
             expand(to: .prompt)
 
+        case .openClipboard:
+            islandPanel.makeKey()
+            fsm.openedExternally()
+            state.focusOrLoad("integration_clipboard")
+            expand(to: .overview)
+
         case .goToAlert:
             if state.pendingApproval != nil {
                 islandPanel.makeKey()

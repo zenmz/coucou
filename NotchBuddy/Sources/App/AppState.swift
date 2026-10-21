@@ -631,6 +631,17 @@ final class AppState: ObservableObject {
         tasks[idx].pillBadge = nil  // clear badge when user brings task to focus
     }
 
+    func focusOrLoad(_ id: String) {
+        if !tasks.contains(where: { $0.id == id }) {
+            if let def = PillCatalog.definition(for: id) {
+                let task = AgentTask(id: def.id, name: def.name, color: def.color,
+                                     category: def.category, subtitle: def.subtitle, source: def.source)
+                tasks.append(task)
+            }
+        }
+        setFocus(id)
+    }
+
     func setPillBadge(_ badge: PillBadge, for id: String) {
         guard let idx = tasks.firstIndex(where: { $0.id == id }) else { return }
         tasks[idx].pillBadge = badge
