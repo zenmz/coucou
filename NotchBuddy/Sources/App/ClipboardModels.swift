@@ -32,7 +32,7 @@ struct ClipboardItem: Identifiable, Codable, Equatable, Sendable {
 
     var timeAgo: String {
         let diff = Date().timeIntervalSince(copiedAt)
-        if diff < 10 { return String(localized: "just now") }
+        if diff < 10 { return String(localized: "plan.just-now") }
         if diff < 60 { return "\(Int(diff))s ago" }
         let mins = Int(diff / 60)
         if mins < 60 { return "\(mins)m ago" }

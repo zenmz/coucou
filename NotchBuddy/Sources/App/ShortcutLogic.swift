@@ -53,7 +53,7 @@ enum ShortcutAction: String, CaseIterable, Sendable {
         case .wardrobeToggle:    return String(localized: "shortcut.wardrobe")
         case .talkToCoucou:      return String(localized: "shortcut.talk-to-coucou")
         case .captureScreen:     return String(localized: "shortcut.capture")
-        case .openClipboard:     return String(localized: "Clipboard")
+        case .openClipboard:     return "Clipboard"
         }
     }
 

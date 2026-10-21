@@ -56,7 +56,7 @@ enum ClipboardTests {
 
     static func testTimeAgoCalculations() {
         let justNow = ClipboardItem(text: "Test", copiedAt: Date())
-        precondition(justNow.timeAgo == "just now" || justNow.timeAgo.hasSuffix("s ago"))
+        precondition(justNow.timeAgo == "just now" || justNow.timeAgo == "plan.just-now" || justNow.timeAgo.hasSuffix("s ago"))
 
         let tenMinsAgo = ClipboardItem(text: "Test", copiedAt: Date().addingTimeInterval(-600))
         precondition(tenMinsAgo.timeAgo == "10m ago")

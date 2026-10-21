@@ -47,7 +47,7 @@ struct ClipboardCardView: View {
                 Image(systemName: "magnifyingglass")
                     .font(.system(size: 10))
                     .foregroundColor(Color(hex: "#6B7079"))
-                TextField("Search history…", text: $store.searchQuery)
+                TextField(text: $store.searchQuery, prompt: Text(verbatim: "Search history…"))
                     .textFieldStyle(.plain)
                     .font(.system(size: 11))
                     .foregroundColor(Color(hex: "#E5E7EB"))
